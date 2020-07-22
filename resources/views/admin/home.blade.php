@@ -1,6 +1,6 @@
 @extends("layouts.admin")
 @section("title")
-Ecommerce
+Home
 @endsection
 @section("content")
 

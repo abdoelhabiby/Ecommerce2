@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>@yield("title")</title>
+  <title> {{__("admin.home")}}  @yield("title")</title>
 
   <!-- Custom fonts for this template-->
   <link href="{{asset("admin")}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -88,6 +88,8 @@
 
   <!-- Bootstrap core JavaScript-->
   <script src="{{asset("admin")}}/vendor/jquery/jquery.min.js"></script>
+    <script src="{{asset("admin")}}/vendor/datatables/jquery.dataTables.min.js"></script>
+
   <script src="{{asset("admin")}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
@@ -102,6 +104,9 @@
   <!-- Page level custom scripts -->
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>  --}}
+
+
+  <script src="{{asset("admin")}}/js/custom.js"></script>
 
 </body>
 
