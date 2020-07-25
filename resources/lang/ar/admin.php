@@ -5,7 +5,7 @@ return [
 
   "profile" => "حسابي",
   "name" => "الاسم",
-  "email" => "ألايميل",
+  "email" => "ألبريد ألالكتروني",
   "address" => "العنوان",
   "admins" => "المشرفين",
   "home" => "الرئيسيه",
@@ -45,10 +45,23 @@ return [
     "back" => "تراجع",
     "save" => "حفظ",
     "main-categories" => "ألاقسام الرئيسيه",
+    "main-category" => "القسم الرئيسي",
     "ar" => "بالعربيه",
     "en" => "بالانجليزيه",
     "message error" => "هناك حطأ يرجي المحاوله في وقت لاحق",
     "photo"                 => "الصوره",
+    "category"  => "قسم",
+    "categories" => "الاقسام",
+    "vendor" => "متجر",
+    "vendors" => "المتاجر",
+    "phone"  => "الهاتف",
+    "logo"  => "الشعار",
+    "new"  => "جديد",
+    "choose category" => "اختر القسم",
+    "please add category" => " اضف قسم يا بيه",
+    "category not found" => "القسم غير موجود",
+    "deactivate" => "الغاء التفعيل",
+    "activation" => "تفعيل",
 
 
 

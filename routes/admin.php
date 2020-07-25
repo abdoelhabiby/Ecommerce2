@@ -5,6 +5,12 @@ use Illuminate\Support\Facades\Route;
 
 define("PAGINATE_COUNT",10);
 
+
+
+
+
+
+
 Route::group(["namespace" => "Admin"],function(){
 
     route::group(["middleware" => "auth:admin"],function(){
@@ -14,13 +20,17 @@ Route::group(["namespace" => "Admin"],function(){
 
 
         Route::resources([
-            'languages'=> 'LanguagesController',
-            'main-categories'=> 'MainCategoryController',
+            'languages'        => 'LanguagesController',
+            'main-categories'  => 'MainCategoryController',
+            'vendors'          => 'VendorController',
         ], [
-            'as' => "admin","except" => "show"
+            'as' => "admin",
+            "except" => "show"
             ]);
 
 
+        Route::get("/main-categories/{main_category}/change-active", "MainCategoryController@changeActive")->name("admin.main-categories.change_active");
+        Route::get("/vendors/{vendor}/change-active", "VendorController@changeActive")->name("admin.vendors.change_active");
 
 
 

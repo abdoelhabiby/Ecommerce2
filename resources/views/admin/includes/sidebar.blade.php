@@ -34,11 +34,14 @@
         </a>
         <div id="language" class="collapse {{request()->segment(2) == "languages" ? "show" : ''}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{route("admin.languages.index")}}" style="background:#f8f9fc">{{__("admin.show_all")}}</a>
+            <a class="collapse-item" href="{{route("admin.languages.index")}}" style="background:#ecedf7">{{__("admin.show_all")}}</a>
             <a class="collapse-item" href="{{route("admin.languages.create")}}">{{__("admin.create")}}</a>
           </div>
         </div>
       </li>
+
+         <!-- Divider -->
+      <hr class="sidebar-divider my-0">
 
 {{-- ========================================================================================= --}}
       <!-- Nav Item - main-categories Collapse Menu -->
@@ -52,19 +55,47 @@
         </a>
         <div id="main-categories" class="collapse {{request()->segment(2) == "main-categories" ? "show" : ''}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{route("admin.main-categories.index")}}" style="background:#f8f9fc">{{__("admin.show_all")}}</a>
+            <a class="collapse-item" href="{{route("admin.main-categories.index")}}" style="background:#ecedf7">{{__("admin.show_all")}}</a>
             <a class="collapse-item" href="{{route("admin.main-categories.create")}}">{{__("admin.create")}}</a>
           </div>
         </div>
       </li>
 
+         <!-- Divider -->
+      <hr class="sidebar-divider my-0">
 
 
 
+
+
+
+      {{-- ========================================================================================= --}}
+      <!-- Nav Item - vendors Collapse Menu -->
+      <li class="nav-item  {{request()->segment(2) == "vendors" ? "active" : ''}}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#vendors" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>{{__("admin.vendors")}}</span>
+          <span class="badge badge badge-info badge-pill ">{{App\Models\Admin\Vendor::count()}}</span>
+
+
+        </a>
+        <div id="vendors" class="collapse {{request()->segment(2) == "vendors" ? "show" : ''}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{route("admin.vendors.index")}}" style="background:#ecedf7">{{__("admin.show_all")}}</a>
+            <a class="collapse-item" href="{{route("admin.vendors.create")}}">{{__("admin.create")}}</a>
+          </div>
+        </div>
+      </li>
 
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
+
+
+
+
+
+
 
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

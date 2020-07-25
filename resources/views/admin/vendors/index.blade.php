@@ -1,6 +1,7 @@
 @extends("layouts.admin")
-@section("title")
-| {{__("admin.main-categories")}}
+
+@section('title')
+| {{__("admin.vendors")}}
 
 @endsection
 
@@ -15,7 +16,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route("admin.home")}}">{{__("admin.home")}}</a>
                                 </li>
-                                <li class="breadcrumb-item active">{{__("admin.main-categories")}}
+                                <li class="breadcrumb-item active">{{__("admin.vendors")}}
                                 </li>
                             </ol>
                         </div>
@@ -29,7 +30,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> {{__("admin.main-categories")}}  </h4>
+                                    <h4 class="card-title"> {{__("admin.vendors")}}  </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -48,54 +49,55 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                         <table
-                                            class="table display nowrap table-striped  table-bordered scroll-horizontal">
+                                            class="table display nowrap table-striped table-bordered ">
                                             <thead>
                                             <tr>
                                                 <th>{{__("admin.name")}}</th>
-                                                <th> {{__("admin.abbr")}}</th>
+                                                <th> {{__("admin.phone")}}</th>
+                                                <th> {{__("admin.main-category")}}</th>
                                                 <th>{{__("admin.active")}}</th>
-                                                <th>{{__("admin.photo")}}</th>
+                                                <th>{{__("admin.logo")}}</th>
                                                 <th>{{__("admin.action")}}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            @isset($main_categories)
-                                            @if($main_categories->count() > 0)
-                                            @foreach($main_categories as $main_category)
+                                            @isset($vendors)
+                                            @if($vendors->count() > 0)
+                                            @foreach($vendors as $vendor)
 
                                                     <tr>
-                                                        <td>{{$main_category->name}}</td>
-                                                        <td>{{$main_category->translation_lang}}</td>
+                                                        <td>{{$vendor->name}}</td>
+                                                        <td>{{$vendor->phone}}</td>
+                                                        <td>{{$vendor->mainCategory->name}}</td>
+                                                         <td>{{$vendor->getCaseActive()}} </td>
                                                         <td>
-                                                            {{$main_category->getCaseActive()}}
-                                                        </td>
-                                                        <td>
-                                                            @if(!empty($main_category->photo) || $main_category->photo != null)
-                                                             <img src="{{asset($main_category->photo)}}" width="70" height="55" class="thumbnail">
+                                                           @if(!empty($vendor->logo) || $vendor->logo != null)
+                                                             <img src="{{asset($vendor->logo)}}" width="70" height="55" class="thumbnail">
                                                             @else
 
                                                             @endif
                                                         </td>
+
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                <a href="{{route("admin.main-categories.edit",$main_category->id)}}"
+                                                                <a href="{{route("admin.vendors.edit",$vendor->id)}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
                                                                    {{__("admin.edit")}}
                                                                 </a>
                                                                 <button type="button"
                                                                         id="button_delete"
-                                                                        data-action="{{route("admin.main-categories.destroy",$main_category->id)}}"
-                                                                        data-name="{{$main_category->name}}"
+                                                                        data-action="{{route("admin.vendors.destroy",$vendor->id)}}"
+                                                                        data-name="{{$vendor->name}}"
                                                                         class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"
                                                                         >
                                                                     {{__("admin.delete")}}
                                                                 </button>
 
-                                                                <a href="{{route("admin.main-categories.change_active",$main_category->id)}}"
+                                                                <a href="{{route("admin.vendors.change_active",$vendor->id)}}"
                                                                    class="btn btn-outline-info btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                      {{$main_category->active == 1 ? __("admin.deactivate") : __("admin.activation")}}
+                                                                      {{$vendor->active == 1 ? __("admin.deactivate") : __("admin.activation")}}
                                                                 </a>
 
                                                             </div>
@@ -125,7 +127,7 @@
         </div>
             <div class="d-flex justify-content-center mt-5">
 
-              {{ $main_categories->appends(request()->query())->links() }}
+              {{ $vendors->appends(request()->query())->links() }}
 
           </div>
     </div>
@@ -142,7 +144,7 @@
                   </button>
               </div>
               <div class="modal-body">
-                  {{__("admin.delete") . " " . __("admin.category")}} <span class="name"></span>
+                  {{__("admin.delete")}} <span class="name"></span>
               </div>
               <div class="modal-footer">
                   <form action="" method="post">

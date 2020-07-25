@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MainCategoryRequest;
 use Illuminate\Support\Facades\File;
+use PhpParser\Node\Stmt\TryCatch;
 
 class MainCategoryController extends Controller
 {
@@ -150,17 +151,17 @@ class MainCategoryController extends Controller
 
                 if ($request->has('photo')) {
 
-                    $photo_to_delet = $main_category->photo;
+                    $photo_to_delet = $main_category->photo ?? null;
                     $photo = $request->file("photo");
                     $path = imageUpload($photo, "main_categories");
                     $validated['photo'] = $path;
 
                     MainCategory::where("translation_of", $main_category->id)->update(['photo' => $path]);
 
-                    if (File::exists(public_path($photo_to_delet))) {
 
-                        File::delete(public_path($photo_to_delet));
-                    }
+
+                    deleteFile($photo_to_delet);
+
 
                 }
 
@@ -191,12 +192,44 @@ class MainCategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * delet with othr translation
+     * and remove photo
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MainCategory $main_category)
     {
-        //
+
+        if (isset($main_category->vendors) && $main_category->vendors->count() > 0) {
+            return redirect(route("admin.main-categories.index"))->with(['error' => "sorry cant delete thos category because has vendors"]);
+        }
+
+        try{
+             $main_category->delete();
+             return redirect(route("admin.main-categories.index"))->with(['success' => __("admin.success delete")]);
+
+        } catch (\Exception $ex) {
+            return redirect(route("admin.main-categories.index"))->with(['error' => __("admin.message error")]);
+        }
+
+    }
+
+
+/*
+------------ chane status active
+*/
+
+    public function changeActive(MainCategory $main_category)
+    {
+        try {
+             $status = $main_category->active == 1 ? 0 : 1;
+             $main_category->update(['active' => $status]);
+            return redirect(route("admin.main-categories.index"))->with(['success' => __("admin.success create")]);
+
+
+        } catch(\Exception $ex) {
+            return redirect(route("admin.main-categories.index"))->with(['error' => __("admin.message error")]);
+        }
+
     }
 }

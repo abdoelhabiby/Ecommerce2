@@ -108,6 +108,9 @@
 
   <script src="{{asset("admin")}}/js/custom.js"></script>
 
+  @yield('scripts')
+
+
 </body>
 
 </html>
